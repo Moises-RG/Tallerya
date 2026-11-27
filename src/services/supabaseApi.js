@@ -12,12 +12,17 @@ export const ETAPAS = [
   'Listo para entregar'
 ];
 
-const getHeaders = (token = null) => ({
-  'Content-Type': 'application/json',
-  apikey: SUPABASE_KEY,
-  Authorization: `Bearer ${token || SUPABASE_KEY}`,
-  Prefer: 'return=representation'
-});
+const getHeaders = (token = null) => {
+  const headers = {
+    'Content-Type': 'application/json',
+    apikey: SUPABASE_KEY,
+    Prefer: 'return=representation'
+  };
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+  return headers;
+};
 
 // --- TALLERES (PostgreSQL) ---
 export const obtenerTalleres = async () => {
